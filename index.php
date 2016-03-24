@@ -32,8 +32,9 @@ session_start();
         </div>
     </nav>
 </div>
-<?php if(isset($_SESSION['zarejestrowano']) && ($_SESSION['zarejestrowano']) == true) echo "Rejestracja zakoñczona powodzeniem"; ?>
+
 <div class="container">
+<?php if(isset($_SESSION['zarejestrowano']) && ($_SESSION['zarejestrowano']) == true) echo "<div class='alert alert-success' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Rejestracja zakończona powodzeniem</strong></div>"; ?>
     <div class="row">
         <div class="col-md-8">
             <div class="jumbotron" style="background-color: #f8f8f8; border-style: solid; border-width: 1px; border-color: #d6d6d6;">
