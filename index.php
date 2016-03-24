@@ -25,21 +25,21 @@ session_start();
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="exercise.html">Zobacz ?wiczenia</a></li>
-                    <li><a href="register.php">Za??? konto</a></li>
+                    <li><a href="exercise.html">Zobacz Ćwiczenia</a></li>
+                    <li><a href="register.php">Załóż konto</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
-<?php if(isset($_SESSION['zarejestrowano']) && ($_SESSION['zarejestrowano']) == true) echo "Rejestracja zako�czona powodzeniem"; ?>
+<?php if(isset($_SESSION['zarejestrowano']) && ($_SESSION['zarejestrowano']) == true) echo "Rejestracja zakoñczona powodzeniem"; ?>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
             <div class="jumbotron" style="background-color: #f8f8f8; border-style: solid; border-width: 1px; border-color: #d6d6d6;">
                 <p>
-                    Aplikacja kt?ra pozwoli ustali? Twoj? diet? oraz plan treningowy! <br>
-                    Oczywi?cie jak wszyscy wywi??? si? ze swoich zada?. <br>
+                    Aplikacja która pozwoli ustalić Twoją dietę oraz plan treningowy! <br>
+                    Oczywiście jak wszyscy wywiążą sią ze swoich zadań. <br>
                 </p>
             </div>
         </div>
@@ -54,10 +54,10 @@ session_start();
                         <input type="text" name="login" class="form-control" placeholder="Login" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group" style="margin-top: 10px; width: 95%; margin-left: 5px; margin-right: 5px;">
-                        <p style="font-size: 20px; margin-left: 5px; margin-right: 5px;">Has?o:</p>
-                        <input type="password" name="haslo" class="form-control" placeholder="Has?o" aria-describedby="basic-addon1">
+                        <p style="font-size: 20px; margin-left: 5px; margin-right: 5px;">Hasło:</p>
+                        <input type="password" name="haslo" class="form-control" placeholder="Hasło" aria-describedby="basic-addon1">
                     </div>
-                        <input type="submit" value="Zaloguj si�" type="button" class="btn btn-primary" style="margin-top: 20px; margin-left: 5px; margin-bottom: 10px;">
+                        <input type="submit" value="Zaloguj siê" type="button" class="btn btn-primary" style="margin-top: 20px; margin-left: 5px; margin-bottom: 10px;">
                 </form>
                         <?php if(isset($_SESSION['blad']))echo $_SESSION['blad']; ?>
                         <?php unset($_SESSION['blad']); ?>
