@@ -26,37 +26,37 @@ if(isset($_POST['submit']))
     
     if($form['name'] == '')
     {
-        $error['name'] = $poczatek_znacznika . "Wypełnij wymagane pole" . $koniec_znacznika;
+        $error['name'] = $poczatek_znacznika . "<div class='alert alert-danger' role='alert' style='margin-bottom: 5px; margin-top: -40px;'>Wypełnij wymagane pole</div>" . $koniec_znacznika;
         $walidacja = FALSE;
     }
     
     if($form['phone'] == '')
     {
-        $error['phone'] = $poczatek_znacznika . "Wypełnij wymagane pole" . $koniec_znacznika;
+        $error['phone'] = $poczatek_znacznika . "<div class='alert alert-danger' role='alert' style='margin-bottom: 5px; margin-top: -40px;'>Wypełnij wymagane pole</div>" . $koniec_znacznika;
         $walidacja = FALSE;
     }
     
     if($form['email'] == '')
     {
-        $error['email'] = $poczatek_znacznika . "Wypełnij wymagane pole" . $koniec_znacznika;
+        $error['email'] = $poczatek_znacznika . "<div class='alert alert-danger' role='alert' style='margin-bottom: 5px; margin-top: -40px;'>Wypełnij wymagane pole</div>" . $koniec_znacznika;
         $walidacja = FALSE;
     }
 
     if($form['subject'] == '')
     {
-        $error['subject'] = $poczatek_znacznika . "Wypełnij wymagane pole" . $koniec_znacznika;
+        $error['subject'] = $poczatek_znacznika . "<div class='alert alert-danger' role='alert' style='margin-bottom: 5px; margin-top: -40px;'>Wypełnij wymagane pole</div>" . $koniec_znacznika;
         $walidacja = FALSE;
     }
     
     if($error['email'] == '' && !preg_match('/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/', $form['email']))
     {
-         $error['email'] = $poczatek_znacznika . "Wprowadź prawidłowy email" . $koniec_znacznika;
+         $error['email'] = $poczatek_znacznika . "<div class='alert alert-danger' role='alert' style='margin-bottom: 5px; margin-top: -40px;'>Wprowadź prawidłowy email</div>" . $koniec_znacznika;
          $walidacja = FALSE;
     }
 
     if($error['phone'] == '' && !preg_match('^\+48[0-9]{9}$^', $form['phone']))
     {
-         $error['phone'] = $poczatek_znacznika . "Wprowadź prawidłowy numer telefonu" . $koniec_znacznika;
+         $error['phone'] = $poczatek_znacznika . "<div class='alert alert-danger' role='alert' style='margin-bottom: 5px; margin-top: -40px;'>Wprowadź prawidłowy numer telefonu </div>" . $koniec_znacznika;
          $walidacja = FALSE;
     }
     
