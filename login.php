@@ -31,6 +31,11 @@ try
 				$row = $result->fetch_assoc();
 				if($haslo_hash == $row['passwd'])
 				{
+                                    $ifactivecode= $row['ifactive'];
+                                    if($ifactivecode==0)
+                                    {
+                                        header('Location: activecodewidok.php');
+                                    }else{
 					$_SESSION['zalogowano'] = true;
 					$_SESSION['id'] = $row['userID'];
 					$_SESSION['login'] = $row['login'];
@@ -51,6 +56,7 @@ try
 					unset($_SESSION['blad']);
 					$result->close();
 					header('Location: pu.php');
+                                        }
 				}
 				else
 				{

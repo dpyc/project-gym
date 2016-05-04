@@ -94,11 +94,19 @@ if(isset($_POST['submit']))
         $walidacja = FALSE;
     }
     
+    $actCode=str_shuffle("qwertyuiopasdfghjklzxcvbnm1234567890");
+    
     if($walidacja)
     {
         
-        if($mysqli->query("INSERT INTO user VALUES(NULL, '$login', '$haslo_hash', NULL, NULL, '$email', NULL, NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL)"))
+        if($mysqli->query("INSERT INTO user VALUES(NULL, '$login', '$haslo_hash', NULL, NULL, '$email', NULL, NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL,'$actCode', 0)"))
         
+        $headers.="MIME-Version: 1.0\r\n";
+        $headers.= 'Content-type: text/html; charset=iso-8859-2'."\r\n";
+        $headers="From: TheGymProject";
+        $content="Witaj $login!</br> Oto Twój kod aktywacyjny: $actCode </br> Przejdz teraz na strone <a href=http://mailtester.cba.pl >gymproject</a>.</br>Pozdrawia, ekipa Gym Project!";
+        mail($email, "Link Aktywacyjny", $content, $headers);    
+            
         $_SESSION['zarejestrowano'] = true;
         header('Location: index.php');
     } 
