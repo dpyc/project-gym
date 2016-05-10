@@ -21,15 +21,28 @@ session_start();
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="glyphicon glyphicon-th-list"/>
                 </button>
-                <a class="navbar-brand" href="#">GymProject</a>
+                <a class="navbar-brand" href="index.php">GymProject</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
-
                     <li><a href="exercise.php">Zobacz Ćwiczenia</a></li>
-                    <li><a href="rejestracja.php">Załóż konto</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kalkulatory
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calc/calc_bmi.php">BMI</a></li>
+                            <li><a href="calc/calc_bmr.php">BRM</a></li>
+                            <li><a href="calc/calc_ptk.php">PTK</a></li>
+                            <li><a href="calc/calc_spalanie_kal.php">Spalanie</a></li>
+                            <li><a href="calc/calc_whr.php">WHR</a></li>
+                            <li><a href="calc_tdee.php">TDEE</a></li>
+                        </ul>
+                    </li>
                     <li><a href="contact.php">Kontakt</a></li>
                     <?php if(isset($_SESSION['zalogowano'])){ echo "<li><a href='pu.php'>Panel Użytkownika</a></li>"; } ?>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="rejestracja.php">Załóż konto</a></li>                
                 </ul>
             </div>
         </div>
@@ -41,14 +54,7 @@ session_start();
     <div class="row">
         <div class="col-md-8">
             <div class="jumbotron" style="background-color: #f8f8f8; border-style: solid; border-width: 1px; border-color: #d6d6d6;">
-                <h1>Kalkulatory</h1>
-                <ul>
-                    <li><a href="calc/calc_bmi.html">bmi</a></li>
-                    <li><a href="calc/calc_bmr.html">bmr</a></li>
-                    <li><a href="calc/calc_ptk.html">ptk</a></li>
-                    <li><a href="calc/calc_spalanie_kal.html">spalanie</a></li>
-                    <li><a href="calc/calc_whr.html">whr</a></li>
-                </ul>
+
             </div>
         </div>
                 <?php if(!isset($_SESSION['zalogowano']))

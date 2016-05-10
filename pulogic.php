@@ -2,8 +2,7 @@
 
 session_start();
 
-		if((isset($_POST['firstname']))&&(isset($_POST['lastname']))&&(isset($_POST['email']))&&(isset($_POST['height']))
-            &&(isset($_POST['weight']))&&(isset($_POST['activity']))&& (isset($_POST['age']))&&(isset($_POST['bodytype'])))
+		if(isset($_POST['submit']))
 		{
             $idUser = $_SESSION['id'];
 			$walidacja = true;

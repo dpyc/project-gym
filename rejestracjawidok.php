@@ -22,11 +22,23 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
-
                     <li><a href="exercise.php">Zobacz Ćwiczenia</a></li>
-                    <li class="active"><a href="rejestracja.php">Załóż konto</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kalkulatory
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calc/calc_bmi.php">BMI</a></li>
+                            <li><a href="calc/calc_bmr.php">BRM</a></li>
+                            <li><a href="calc/calc_ptk.php">PTK</a></li>
+                            <li><a href="calc/calc_spalanie_kal.php">Spalanie</a></li>
+                            <li><a href="calc/calc_whr.php">WHR</a></li>
+                        </ul>
+                    </li>
                     <li><a href="contact.php">Kontakt</a></li>
                     <?php if(isset($_SESSION['zalogowano'])){ echo "<li><a href='pu.php'>Panel Użytkownika</a></li>"; } ?>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="rejestracja.php">Załóż konto</a></li>                
                 </ul>
             </div>
         </div>

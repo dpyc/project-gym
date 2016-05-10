@@ -7,6 +7,10 @@ if(!isset($_SESSION['zalogowano']))
 	header('Location: index.php');
 	exit();
 }
+require_once "connect.php";
+$login = $_SESSION['login'];
+$result = $mysqli->query("SELECT * FROM user WHERE login = '$login'");
+$row = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +24,7 @@ if(!isset($_SESSION['zalogowano']))
 	<title>Panel Użytkownika</title>
 </head>
 <body>
+
 <div class="container">
     <nav class="navbar navbar-default" style="margin-top: 20px; border-color: #d6d6d6;">
         <div class="container-fluid">
@@ -33,11 +38,27 @@ if(!isset($_SESSION['zalogowano']))
                 <ul class="nav navbar-nav navbar-left">
 
                     <li><a href="exercise.php">Zobacz Ćwiczenia</a></li>
-                    <li><a href="rejestracja.php">Załóż konto</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kalkulatory
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calc/calc_bmi.php">BMI</a></li>
+                            <li><a href="calc/calc_bmr.php">BRM</a></li>
+                            <li><a href="calc/calc_ptk.php">PTK</a></li>
+                            <li><a href="calc/calc_spalanie_kal.php">Spalanie</a></li>
+                            <li><a href="calc/calc_whr.php">WHR</a></li>
+                            <li><a href="calc_tdee.php">TDEE</a></li>
+                        </ul>
+                    </li>
                     <li><a href="contact.php">Kontakt</a></li>
                     <li class="active"><a href="#">Panel Użytkownika</a></li>
+                    <li><a href="trening.php">Plan Treningowy</a></li>
                     <li><a href="logout.php">Wyloguj się</a></li>
-                </ul>
+                </ul>    
+                    <ul class="nav navbar-nav navbar-right">
+                    <li><a href="rejestracja.php">Załóż konto</a></li>                
+                    </ul>
+                
             </div>
         </div>
     </nav>
@@ -46,39 +67,35 @@ if(!isset($_SESSION['zalogowano']))
 <br><br>
 <div class="container">
         <div class="jumbotron" style="background-color: #f8f8f8; border-style: solid; border-width: 1px; border-color: #d6d6d6;">
-        <h2 style="font-size: 60px;">Panel użytkownika <?php echo $_SESSION['login']; ?></h2>
+        <h2 style="font-size: 60px;">Panel użytkownika <?php echo $row['login']; ?></h2>
             <ul class="list-group">
                 <li class="list-group-item">
                 <p style="font-size: 20px;">Login</p>
-                <?php echo $_SESSION['login']; ?>
+                <?php echo $row['login']; ?>
                 </li>
                 <li class="list-group-item">
                 <p style="font-size: 20px;">Imię i nazwisko</p>
-                <?php echo $_SESSION['firstname']," ",$_SESSION['lastname']; ?>
+                <?php echo $row['firstname']," ",$row['lastname']; ?>
                 </li>
                 <li class="list-group-item">
                 <p style="font-size: 20px;">Email</p>
-                <?php echo $_SESSION['email']; ?>
+                <?php echo $row['email']; ?>
                 </li>
                 <li class="list-group-item">
                 <p style="font-size: 20px;">Wzrosi i waga</p>
-                <?php echo $_SESSION['height'], " ", $_SESSION['weight']; ?>
+                <?php echo $row['height'], " ", $row['weight']; ?>
                 </li>
                 <li class="list-group-item">
                 <p style="font-size: 20px;">Wiek i płeć</p>
-                <?php echo $_SESSION['age']," ", $_SESSION['sex']; ?>
+                <?php echo $row['age']," ", $row['sex']; ?>
                 </li>
                 <li class="list-group-item">
                 <p style="font-size: 20px;">Aktywność</p>
-                <?php echo $_SESSION['activity']; ?>
+                <?php echo $row['activity']; ?>
                 </li>
                 <li class="list-group-item">
                 <p style="font-size: 20px;">Kcal, węglowodany, tłuszcze, proteiny</p>
-                <?php echo $_SESSION['kcal']," ", $_SESSION['carbs']," ", $_SESSION['fats']," ", $_SESSION['proteins'] ; ?>
-                </li>
-                </li>
-                <li class="list-group-item">
-                    <p style="font-size: 20px;">Stopień zaawansowania</p>
+                <?php echo $row['kcal']," ", $row['carbs']," ", $row['fats']," ", $row['proteins'] ; ?>
                 </li>
             </ul>
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edytuj profil</button>
@@ -143,10 +160,10 @@ if(!isset($_SESSION['zalogowano']))
                         }
                         ?>
                         Aktywność:<br>
-                        <label class="radio-inline"><input id="inlineRadioSmall" class="radio-inline" type="radio" name="activity" value="1.0">Nisko aktywny</label>
-                        <label class="radio-inline"><input id="inlineRadioMedium" class="radio-inline" type="radio" name="activity" value="1.15">Średnio aktywny</label>
-                        <label class="radio-inline"><input id="inlineRadioBig" class="radio-inline" type="radio" name="activity" value="1.35">Aktywny</label>
-                        <label class="radio-inline"><input id="inlineRadioBig" class="radio-inline" type="radio" name="activity" value="1.5">Bardzo aktywny</label>
+                        <label class="radio-inline"><input id="inlineRadioSmall" class="radio-inline" type="radio" name="activity" value="small">Nisko aktywny</label>
+                        <label class="radio-inline"><input id="inlineRadioMedium" class="radio-inline" type="radio" name="activity" value="medium">Średnio aktywny</label>
+                        <label class="radio-inline"><input id="inlineRadioBig" class="radio-inline" type="radio" name="activity" value="big">Aktywny</label>
+                        <label class="radio-inline"><input id="inlineRadioBig" class="radio-inline" type="radio" name="activity" value="verybig">Bardzo aktywny</label>
                         <br>
                         <?php
                         if(isset($_SESSION['e_activity']))
@@ -157,9 +174,9 @@ if(!isset($_SESSION['zalogowano']))
                         ?>
 
                         Typ budowy ciała:<br>
-                        <label class="radio-inline"><input id="inlineRadioSmall" class="radio-inline" type="radio" name="bodytype" value="1.2">Ektomorfik</label>
-                        <label class="radio-inline"><input id="inlineRadioMedium" class="radio-inline" type="radio" name="bodytype" value="1.1">Mezomorfik</label>
-                        <label class="radio-inline"><input id="inlineRadioBig" class="radio-inline" type="radio" name="bodytype" value="1.0">Endomorfik</label>
+                        <label class="radio-inline"><input id="inlineRadioSmall" class="radio-inline" type="radio" name="bodytype" value="ectomorph">Ektomorfik</label>
+                        <label class="radio-inline"><input id="inlineRadioMedium" class="radio-inline" type="radio" name="bodytype" value="mesomorph">Mezomorfik</label>
+                        <label class="radio-inline"><input id="inlineRadioBig" class="radio-inline" type="radio" name="bodytype" value="endomorph">Endomorfik</label>
                         <br>
                         <?php
                         if(isset($_SESSION['e_bodytype']))
@@ -179,27 +196,9 @@ if(!isset($_SESSION['zalogowano']))
                             unset($_SESSION['e_age']);
                         }
                         ?>
-                        <br>Stopień zaawansowania:</br>
-                        <form action="...">
-                            <select name="Stza">
-                                <option>Początkujący</option>
-                                <option>Średnioozaawansowany</option>
-                                <option>Zaawansowany</option>
-                                (...)
-                            </select>
-                        </form>
-                        <br>Ilość dni treningowych:</br>
-                        <form action="...">
-                            <select name="Idt">
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                (...)
-                            </select>
-                        </form>
                     </div>
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" value="Edycja profilu">
+                <input type="submit" name="submit" class="btn btn-primary" value="Edycja profilu">
             </div>
             </form>
             </div>
