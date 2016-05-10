@@ -60,6 +60,10 @@ require_once "connect.php";
         </div>
     </nav>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="jumbotron" style="background-color: #f8f8f8; border-style: solid; border-width: 1px; border-color: #d6d6d6;">
                          <form action="" method="post" style=" width: 500px; margin: 10px auto">
                             <h2>Stopień zaawansowania:</h2>
                             <select name="lvl[]">
@@ -75,65 +79,77 @@ require_once "connect.php";
                              </select>
                             <br><br><input type="submit" name="submit" class="btn btn-primary" value="Plan">
                         </form>
-                      </div>
+                <?php
 
+                if(isset($_POST['submit'])){
 
-<?php
+                if($_POST['lvl'][0] == "Początkujący" && $_POST['dni'][0] == "2"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 1 AND numberOfPlan = 1");
+                    $komunikat = "Trening początkujący, 2 dni tygodniowo";
+                } 
+                if($_POST['lvl'][0] == "Początkujący" && $_POST['dni'][0] == "3"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 1 AND numberOfPlan = 2");
+                    $komunikat = "Trening początkujący, 3 dni tygodniowo";
+                }   
+                if($_POST['lvl'][0] == "Początkujący" && $_POST['dni'][0] == "4"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 1 AND numberOfPlan = 3");
+                    $komunikat = "Trening początkujący, 4 dni tygodniowo";
+                } 
+                if($_POST['lvl'][0] == "Średnioozaawansowany" && $_POST['dni'][0] == "2"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 1");
+                    $komunikat = "Trening średniozaawansowany, 2 dni tygodniowo";
+                }  
+                if($_POST['lvl'][0] == "Średnioozaawansowany" && $_POST['dni'][0] == "3"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 2");
+                    $komunikat = "Trening średniozaawansowany, 3 dni tygodniowo";
+                }  
+                if($_POST['lvl'][0] == "Średnioozaawansowany" && $_POST['dni'][0] == "4"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 3");
+                    $komunikat = "Trening średniozaawansowany, 4 dni tygodniowo";
+                } 
+                if($_POST['lvl'][0] == "Zaawansowany" && $_POST['dni'][0] == "2"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 1");
+                    $komunikat = "Trening zaawansowany, 2 dni tygodniowo";
+                } 
+                if($_POST['lvl'][0] == "Zaawansowany" && $_POST['dni'][0] == "3"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 2");
+                    $komunikat = "Trening zaawansowany, 3 dni tygodniowo";
+                } 
+                if($_POST['lvl'][0] == "Zaawansowany" && $_POST['dni'][0] == "4"){
+                    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 3");
+                    $komunikat = "Trening zaawansowany, 4 dni tygodniowo";
+                } 
+                ?>
+                    <h1><?php $komunikat?></h1><br>
+                    <table class="table table-striped">
+                        <tr class="success">
+                            <th>Nazwa Ćwiczenia</th>
+                            <th>Seria</th>
+                            <th>Powtórzenia</th>
+                        </tr>
+                        <?php
+                        while($row = $result->fetch_object())
+                        {
 
-if(isset($_POST['submit'])){
+                            echo"<tr>";
+                            echo"<td>".$row->exerciseName."</td>";
+                            echo"<td>".$row->numberOfSets."</td>";
+                            echo"<td>".$row->numberOfReps."</td>"; 
+                            echo"</tr>";
 
-if($_POST['lvl'][0] == "Początkujący" && $_POST['dni'][0] == "2"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 1 AND numberOfPlan = 1");
-    $komunikat = "Trening początkujący, 2 dni tygodniowo";
-} 
-if($_POST['lvl'][0] == "Początkujący" && $_POST['dni'][0] == "3"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 1 AND numberOfPlan = 2");
-    $komunikat = "Trening początkujący, 3 dni tygodniowo";
-}   
-if($_POST['lvl'][0] == "Początkujący" && $_POST['dni'][0] == "4"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 1 AND numberOfPlan = 3");
-    $komunikat = "Trening początkujący, 4 dni tygodniowo";
-} 
-if($_POST['lvl'][0] == "Średnioozaawansowany" && $_POST['dni'][0] == "2"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 1");
-    $komunikat = "Trening średniozaawansowany, 2 dni tygodniowo";
-}  
-if($_POST['lvl'][0] == "Średnioozaawansowany" && $_POST['dni'][0] == "3"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 2");
-    $komunikat = "Trening średniozaawansowany, 3 dni tygodniowo";
-}  
-if($_POST['lvl'][0] == "Średnioozaawansowany" && $_POST['dni'][0] == "4"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 3");
-    $komunikat = "Trening średniozaawansowany, 4 dni tygodniowo";
-} 
-if($_POST['lvl'][0] == "Zaawansowany" && $_POST['dni'][0] == "2"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 1");
-    $komunikat = "Trening zaawansowany, 2 dni tygodniowo";
-} 
-if($_POST['lvl'][0] == "Zaawansowany" && $_POST['dni'][0] == "3"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 2");
-    $komunikat = "Trening zaawansowany, 3 dni tygodniowo";
-} 
-if($_POST['lvl'][0] == "Zaawansowany" && $_POST['dni'][0] == "4"){
-    $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 2 AND numberOfPlan = 3");
-    $komunikat = "Trening zaawansowany, 4 dni tygodniowo";
-} 
+                        }
+                        ?>
+                    </table>
+                <?php
+                }  
+                ?>
+            </div>
+        </div>
+        <div class="col-md-4">
 
-    echo "<h1>".$komunikat."</h1><br>";
-    echo "<table border='1' cellpadding='10'>";
-    echo "<tr><th>Nazwa Ćwiczenia</th><th>Seria</th><th>Powtórzenia</th></tr>";
-    while($row = $result->fetch_object())
-    {
-        echo "<tr>";
-        echo "<td>".$row->exerciseName."</td>";
-        echo "<td>".$row->numberOfSets."</td>";
-        echo "<td>".$row->numberOfReps."</td>"; 
-        echo "</tr>";
-    }
-    echo "</table>";
-}  
-?>
-
+      </div>
+    </div>
+</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="js/bootstrap.js"></script>
 </body>
