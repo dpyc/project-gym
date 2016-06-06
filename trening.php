@@ -82,7 +82,7 @@ require_once "connect.php";
                 <?php
 
                 if(isset($_POST['submit'])){
-
+				$mysqli->query("SET NAMES 'utf8'");
                 if($_POST['lvl'][0] == "Początkujący" && $_POST['dni'][0] == "2"){
                     $result = $mysqli->query("SELECT * FROM exercise WHERE numberOfAdvanced = 1 AND numberOfPlan = 1");
                     $komunikat = "Trening początkujący, 2 dni tygodniowo";
